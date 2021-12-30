@@ -1,11 +1,12 @@
-﻿using System;
+﻿using RealEstateProperties.Core.Interfaces.Repositories;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
 
 namespace RealEstateProperties.Core.Entitites
 {
-    public partial class PropertyImage
+    public partial class PropertyImage : BaseEntity
     {
         public int IdPropertyImage { get; set; }
         public string File { get; set; }

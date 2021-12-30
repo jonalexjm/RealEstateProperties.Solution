@@ -1,11 +1,12 @@
-﻿using System;
+﻿using RealEstateProperties.Core.Interfaces.Repositories;
+using System;
 using System.Collections.Generic;
 
 #nullable disable
 
 namespace RealEstateProperties.Core.Entitites
 {
-    public partial class PropertyTrace
+    public partial class PropertyTrace : BaseEntity
     {
         public int IdPropertyTrace { get; set; }
         public DateTime? DataSale { get; set; }
