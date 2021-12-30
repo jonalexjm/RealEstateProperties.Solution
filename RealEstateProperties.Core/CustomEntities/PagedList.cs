@@ -14,7 +14,7 @@ namespace RealEstateProperties.Core.CustomEntities
         public bool HasPreviousPage => CurrentPage > 1;
         public bool HasNextPage => CurrentPage < TotalPages;
         public int? NextPageNumber => HasNextPage ? CurrentPage + 1 : (int?)null;
-        public int? PreviusPageNumber => HasPreviousPage ? CurrentPage - 1 : (int?)null;
+        public int? PreviousPageNumber => HasPreviousPage ? CurrentPage - 1 : (int?)null;
 
         public PagedList(List<T> items, int count, int pageNumber, int pageSize)
         {
@@ -22,8 +22,8 @@ namespace RealEstateProperties.Core.CustomEntities
             PageSize = pageSize;
             CurrentPage = pageNumber;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-            AddRange(items);
 
+            AddRange(items);
         }
 
         public static PagedList<T> Create(IEnumerable<T> source, int pageNumber, int pageSize)

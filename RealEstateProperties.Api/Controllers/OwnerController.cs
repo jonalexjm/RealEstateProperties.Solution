@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RealEstateProperties.Api.Responses;
 using RealEstateProperties.Core.DTOs;
+using RealEstateProperties.Core.Entitites;
 using RealEstateProperties.Core.Interfaces.Services;
 using RealEstateProperties.Core.QueryFilters;
 using System.Collections.Generic;
@@ -46,6 +47,15 @@ namespace RealEstateProperties.Api.Controllers
             };
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
             return Ok(response);
+        }
+
+        [HttpPost("CreateOwner")]
+        public async Task<IActionResult> CreateOwner(OwnerDto ownerDto)
+        {
+            var owner = _mapper.Map<Owner>(ownerDto);            
+            await _ownerService.CreateOwner(owner);
+
+            return Ok(ownerDto);
         }
     }
 }

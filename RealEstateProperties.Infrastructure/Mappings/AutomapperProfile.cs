@@ -9,6 +9,9 @@ namespace RealEstateProperties.Infrastructure.Mappings
         public AutomapperProfile()
         {
             CreateMap<Owner, OwnerDto>().ReverseMap();
+            CreateMap<Property, PropertyDto>().ReverseMap();
+            CreateMap<PropertyTrace, PropertyTraceDto>().ReverseMap();
+            CreateMap<PropertyImage, PropertyImageDto>().ReverseMap();
         }
     }
 }

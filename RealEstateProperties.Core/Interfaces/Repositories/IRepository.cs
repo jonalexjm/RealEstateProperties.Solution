@@ -13,5 +13,7 @@ namespace RealEstateProperties.Core.Interfaces.Repositories
         Task Add(T entity);
         void Update(T entity);
         Task Delete(int id);
+        Task<T> UpdateAsync(T entity);
+        Task DeleteAsync(T entity);
     }
 }

@@ -29,6 +29,9 @@ namespace RealEstateProperties.Infrastructure.Extensions
         public static void AddServices(this IServiceCollection services)
         {
             services.AddTransient<IOwnerService, OwnerService>();
+            services.AddTransient<IPropertyImageService, PropertyImageService>();
+            services.AddTransient<IPropertyService, PropertyService>();
+            services.AddTransient<IPropertyTraceService, PropertyTraceService>();
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
         }

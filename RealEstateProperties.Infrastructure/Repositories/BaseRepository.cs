@@ -44,5 +44,24 @@ namespace RealEstateProperties.Infrastructure.Repositories
         {
             _entities.Update(entity);
         }
+
+
+        public async Task<T> UpdateAsync(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            await SaveAllAsync();
+            return entity;
+        }
+
+        public async Task DeleteAsync(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            await SaveAllAsync();
+        }
+
+        public async Task<bool> SaveAllAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

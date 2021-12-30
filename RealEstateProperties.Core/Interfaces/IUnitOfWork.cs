@@ -10,6 +10,8 @@ namespace RealEstateProperties.Core.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IOwnerRepository OwnerRepository { get; }
+        IPropertyImageRepository PropertyImageRepository { get; }
+        IPropertyRepository PropertyRepository { get; }
         void SaveChanges();
         Task SaveChangesAsync();
     }
