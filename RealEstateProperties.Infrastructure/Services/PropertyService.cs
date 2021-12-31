@@ -15,11 +15,14 @@ namespace RealEstateProperties.Infrastructure.Services
     {
         private readonly IUnitOfWork _unitOfWork;
 
+        #region Constructor
         public PropertyService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
+        #endregion
 
+        #region Methods
         /// <summary>
         /// Método para crear registro Property
         /// </summary>
@@ -50,6 +53,11 @@ namespace RealEstateProperties.Infrastructure.Services
             return pagedProperties;
         }
 
+        /// <summary>
+        /// Método para consultar property por Id
+        /// </summary>
+        /// <param name="id"> Id Property a obtener </param>
+        /// <returns> Retorna resutlado de operacion true o false</returns>
         public Task<Property> GetProperty(int id)
         {
             return _unitOfWork.PropertyRepository.GetById(id);
@@ -89,5 +97,24 @@ namespace RealEstateProperties.Infrastructure.Services
 
             return true;
         }
+
+        /// <summary>
+        /// Método cambiar de precio una property
+        /// </summary>
+        /// <param name="idProperty"> Id Property </param>
+        /// <param name="price"> Nuevo precio property </param>
+        /// <returns> Retorna resutlado de operacion</returns>
+        public async Task<bool> UpdatePrice(int idProperty, decimal price)
+        {
+            var propertyResult = await _unitOfWork.PropertyRepository.GetById(idProperty);
+            if (propertyResult != null)
+            {
+                propertyResult.Price = price;
+                await _unitOfWork.PropertyRepository.UpdateAsync(propertyResult);
+                return true;
+            }
+            return false;
+        }
+        #endregion
     }
 }

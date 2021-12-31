@@ -27,6 +27,7 @@ namespace RealEstateProperties.Api.Controllers
             _mapper = mapper;
         }
 
+        #region Methods
         /// <summary>
         /// Método para consultar la información del PropertyImage
         /// </summary>
@@ -35,7 +36,6 @@ namespace RealEstateProperties.Api.Controllers
         [HttpGet("GetAllpropertyImages")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<List<PropertyImageDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ApiResponse<List<PropertyImageDto>>))]
-        //[FromQuery] sirve para decirle que los filters vienen por query string
         public async Task<IActionResult> GetAllPropertyImage([FromQuery] PropertyImageQueryFilter filters)
         {            
             var propertyImages = await _propertyImageService.GetAllPropertyImage(filters);
@@ -54,6 +54,11 @@ namespace RealEstateProperties.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Método para crear PropertyImage
+        /// </summary>
+        /// <param name="propertyImageDto"> Objeto PropertyImage para crear nuevo registro</param>
+        /// <returns>Objeto PropertyImage creado</returns>
         [HttpPost("CreatePropertyImage")]
         public async Task<IActionResult> CreatePropertyImage(PropertyImageDto propertyImageDto)
         {
@@ -62,5 +67,6 @@ namespace RealEstateProperties.Api.Controllers
 
             return Ok(propertyImage);
         }
+        #endregion
     }
 }

@@ -26,11 +26,15 @@ namespace RealEstateProperties.Api.Controllers
             _ownerService = ownerService;
             _mapper = mapper;
         }
-
+        #region Methods
+        /// <summary>
+        /// Método para consultar la información de Owner
+        /// </summary>
+        /// <param name="filters"> Objeto para el filtro de resultados</param>
+        /// <returns> Objeto con resultado de la peticion </returns>
         [HttpGet("GetAllOwners")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<List<OwnerDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ApiResponse<List<OwnerDto>>))]
-        //[FromQuery] sirve para decirle que los filters vienen por query string
         public async Task<IActionResult> GetAllOwners([FromQuery] OwnerQueryFilter filters)
         {
             var owners = await _ownerService.GetAllOwner(filters);
@@ -49,6 +53,11 @@ namespace RealEstateProperties.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Método para crear Owner
+        /// </summary>
+        /// <param name="propertyImageDto"> Objeto Owner para crear nuevo registro</param>
+        /// <returns>Objeto Owner creado</returns>
         [HttpPost("CreateOwner")]
         public async Task<IActionResult> CreateOwner(OwnerDto ownerDto)
         {
@@ -57,5 +66,6 @@ namespace RealEstateProperties.Api.Controllers
 
             return Ok(ownerDto);
         }
+        #endregion
     }
 }
