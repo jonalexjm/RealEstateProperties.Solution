@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -35,6 +36,7 @@ namespace RealEstateProperties.Api.Controllers
         [HttpGet("GetAllOwners")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<List<OwnerDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ApiResponse<List<OwnerDto>>))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(ApiResponse<List<OwnerDto>>))]
         public async Task<IActionResult> GetAllOwners([FromQuery] OwnerQueryFilter filters)
         {
             var owners = await _ownerService.GetAllOwner(filters);
