@@ -40,29 +40,29 @@ namespace RealEstateProperties.Api
             #region Swagger
             services.AddSwaggerGen(c =>
                 {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Real Estate Properties Api", Version = "v1" });
-                    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Real Estate Properties Api", 
+                                                         Version = "v1" });
+                    var securitySchema = new OpenApiSecurityScheme
                     {
-                        In = ParameterLocation.Header,
-                        Description = "Please insert JWT with Bearer into field",
+                        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                         Name = "Authorization",
-                        Type = SecuritySchemeType.ApiKey
-                    });                  
-
-                    // Make sure swagger UI requires a Bearer token specified
-                    OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme()
-                    {
-                        Reference = new OpenApiReference()
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "bearer",
+                        Reference = new OpenApiReference
                         {
-                            Id = "jwt_auth",
-                            Type = ReferenceType.SecurityScheme
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
                         }
                     };
-                    OpenApiSecurityRequirement securityRequirements = new OpenApiSecurityRequirement()
-                        {
-                            {securityScheme, new string[] { }},
-                        };
-                    c.AddSecurityRequirement(securityRequirements);
+                    c.AddSecurityDefinition("Bearer", securitySchema);
+
+                    var securityRequirement = new OpenApiSecurityRequirement
+                    {
+                        { securitySchema, new[] { "Bearer" } }
+                    };
+
+                    c.AddSecurityRequirement(securityRequirement);
                 });
             #endregion
             #region Security JWT
