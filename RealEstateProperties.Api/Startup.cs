@@ -74,9 +74,9 @@ namespace RealEstateProperties.Api
             {
                 option.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ValidateLifetime = false,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
                     ValidateIssuerSigningKey = false,
                     ValidIssuer = Configuration["Authentication:Issuer"],
                     ValidAudience = Configuration["Authentication:Audience"],
@@ -107,6 +107,7 @@ namespace RealEstateProperties.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

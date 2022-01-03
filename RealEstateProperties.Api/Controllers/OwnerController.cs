@@ -33,6 +33,7 @@ namespace RealEstateProperties.Api.Controllers
         /// </summary>
         /// <param name="filters"> Objeto para el filtro de resultados</param>
         /// <returns> Objeto con resultado de la peticion </returns>
+        [Authorize]
         [HttpGet("GetAllOwners")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<List<OwnerDto>>))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ApiResponse<List<OwnerDto>>))]
