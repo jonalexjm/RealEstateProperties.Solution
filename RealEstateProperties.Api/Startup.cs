@@ -11,6 +11,7 @@ using RealEstateProperties.Infrastructure.Filters;
 using System;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.IO;
 
 namespace RealEstateProperties.Api
 {
@@ -37,33 +38,8 @@ namespace RealEstateProperties.Api
                 });
             services.AddDbContexts(Configuration);
             services.AddServices();
-            #region Swagger
-            services.AddSwaggerGen(c =>
-                {
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Real Estate Properties Api", 
-                                                         Version = "v1" });
-                    var securitySchema = new OpenApiSecurityScheme
-                    {
-                        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                        Name = "Authorization",
-                        In = ParameterLocation.Header,
-                        Type = SecuritySchemeType.Http,
-                        Scheme = "bearer",
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    };
-                    c.AddSecurityDefinition("Bearer", securitySchema);
-
-                    var securityRequirement = new OpenApiSecurityRequirement
-                    {
-                        { securitySchema, new[] { "Bearer" } }
-                    };
-
-                    c.AddSecurityRequirement(securityRequirement);
-                });
+            #region Swagger            
+            services.AddSwagger(Configuration);
             #endregion
             #region Security JWT
             services.AddAuthentication(options =>
